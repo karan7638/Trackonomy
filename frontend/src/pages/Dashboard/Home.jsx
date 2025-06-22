@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
-import { UseUserAuth } from "../../hooks/UseUserAuth";
+import { useUserAuth } from "../../hooks/useUserAuth";
 import { useState } from "react";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
@@ -20,7 +20,7 @@ import RecentIncome from "./RecentIncome";
 
 
 const Home = () => {
-    UseUserAuth();
+    useUserAuth();
 
     const navigate = useNavigate();
 
@@ -41,7 +41,7 @@ const Home = () => {
           setDashboardData(response.data);
         }
       }catch(error){
-        console.log("Something went weong. Please try again.", error)
+        console.log("Something went wrong. Please try again.", error)
       }finally{
         setLoading(false);
       }
@@ -74,7 +74,7 @@ const Home = () => {
                   <InfoCard
                     icon = {<LuHandCoins/>}
                     label = "Total Expense"
-                    value = {addThousandsSeparator(dashboardData?.totalExpense || 0)}
+                    value = {addThousandsSeparator(dashboardData?.totalExpenses || 0)}
                     color="bg-red-500"
                     />
 
@@ -90,7 +90,7 @@ const Home = () => {
                 <FinanceOverview
                   totalBalance={dashboardData?.totalBalance || 0}
                   totalIncome ={dashboardData?.totalIncome || 0}
-                  totalExpense={dashboardData?.totalExpense || 0}
+                  totalExpense={dashboardData?.totalExpenses || 0}
                 /> 
 
 

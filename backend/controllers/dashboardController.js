@@ -52,10 +52,17 @@ exports.getDashboardData = async (req, res) => {
             ...(await Income.find({ userId }).sort({ date: -1 }).limit(5)).map(
                 (txn) => ({
                     ...txn.toObject(),
-                    type: "expense",
+                    type: "income",
                 })
             ),
-        ].sort((a, b) => b.date - a.date); //Sort latest first
+            ...(await Expense.find({ userId }).sort({ date: -1 }).limit(5)).map(
+        (txn) => ({
+            ...txn.toObject(),
+            type: "expense",
+        })
+    ),
+        ].sort((a, b) => new Date(b.date) - new Date(a.date))
+        .slice(0, 5)
 
         // Final Response
         res.json({

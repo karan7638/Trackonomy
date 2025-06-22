@@ -26,8 +26,10 @@ const Input = ({ value, onChange, placeholder, label, type }) => {
                     onChange={(e) => onChange(e)}
                 />
 
-                {type === "password" &&
-                    (showPassword ? (
+                {type === "password" && (
+                    <>
+                
+                    {showPassword ? (
                         <FaRegEye
                             size={22}
                             className="text-primary cursor-pointer"
@@ -39,7 +41,9 @@ const Input = ({ value, onChange, placeholder, label, type }) => {
                             className="text-slate-400 cursor-pointer"
                             onClick={() => toggleShowPassword()}
                         />
-                    ))}
+                    )}
+                    </>
+                )}
             </div>
         </div>
     );
