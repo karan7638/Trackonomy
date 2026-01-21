@@ -1,6 +1,6 @@
 import { LuArrowRight } from 'react-icons/lu';
 import moment from 'moment';
-import TransactionInfoCard from '../Cards/transactionInfoCard';
+import TransactionInfoCard from '../Cards/TransactionInfoCard';
 
 const RecentTransactions = ({ transactions, onSeeMore }) => {
   return (
@@ -22,7 +22,7 @@ const RecentTransactions = ({ transactions, onSeeMore }) => {
             date={moment(item.date).format("Do MMM YYYY")}
             amount={item.amount}
             type={item.type}
-            hideDeleteBtn         
+            hideDeleteBtn
           />
         ))}
       </div>
