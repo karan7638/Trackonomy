@@ -7,16 +7,18 @@ const DashboardLayout = ({ children, activeMenu }) => {
   const { user } = useContext(UserContext);
 
   return (
-    <div className="">
+    <div className="min-h-screen bg-[#f8fafc]">
       <Navbar activeMenu={activeMenu} />
 
       {user && (
-        <div className="flex">
-          <div className="max-[1080px]:hidden">
+        <div className="flex max-w-[1600px] mx-auto">
+          <div className="hidden lg:block">
             <SideMenu activeMenu={activeMenu} />
           </div>
 
-          <div className="grow mx-5">{children}</div>
+          <main className="flex-1 p-4 md:p-8 lg:p-10 transition-all duration-300 overflow-hidden">
+            {children}
+          </main>
         </div>
       )}
     </div>
@@ -24,4 +26,3 @@ const DashboardLayout = ({ children, activeMenu }) => {
 };
 
 export default DashboardLayout;
-

@@ -100,39 +100,48 @@ const Income = () => {
 
     // handle download income details
     const handleDownloadIncomeDetails = async () => {
-        try{
-        const response = await axiosInstance.get(
-          API_PATHS.INCOME.DOWNLOAD_INCOME,
-          {
-            responseType: "blob"
-          }
-        );
+        try {
+            const response = await axiosInstance.get(
+                API_PATHS.INCOME.DOWNLOAD_INCOME,
+                {
+                    responseType: "blob"
+                }
+            );
 
-        // Create a URL for the blob
-        const url = window.URL.createObjectURL(new Blob([response.data]) );
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", "income_details.xlsx");
-        document.body.appendChild(link);
-        link.click();
-        link.parentNode.removeChild(link);
-        window.URL.revokeObjectURL(url);
-      } catch (error){
-        console.log("Error downloading income details:", error);
-        toast.error("Failed to download income details. Please try again.");
-      }
+            // Create a URL for the blob
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", "income_details.xlsx");
+            document.body.appendChild(link);
+            link.click();
+            link.parentNode.removeChild(link);
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.log("Error downloading income details:", error);
+            toast.error("Failed to download income details. Please try again.");
+        }
     };
 
     useEffect(() => {
         fetchIncomeDetails();
 
-        return () => {};
+        return () => { };
     }, []);
 
     return (
         <DashboardLayout activeMenu="Income">
-            <div className="my-5 mx-auto">
-                <div className="grid grid-cols-1 gap-6">
+            <div className="mx-auto">
+                <div className="mb-8">
+                    <h1 className="text-2xl md:text-3xl font-bold text-slate-900">
+                        Income Sources
+                    </h1>
+                    <p className="text-slate-500 mt-1 font-medium">
+                        Manage and track all your income streams in one place.
+                    </p>
+                </div>
+
+                <div className="grid grid-cols-1 gap-8">
                     <div className="">
                         <IncomeOverview
                             transactions={incomeData}

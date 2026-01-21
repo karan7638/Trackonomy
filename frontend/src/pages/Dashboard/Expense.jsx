@@ -97,40 +97,49 @@ const Expense = () => {
 
     // handle download expense details
     const handleDownloadExpenseDetails = async () => {
-      try{
-        const response = await axiosInstance.get(
-          API_PATHS.EXPENSE.DOWNLOAD_EXPENSE,
-          {
-            responseType: "blob"
-          }
-        );
+        try {
+            const response = await axiosInstance.get(
+                API_PATHS.EXPENSE.DOWNLOAD_EXPENSE,
+                {
+                    responseType: "blob"
+                }
+            );
 
-        // Create a URL for the blob
-        const url = window.URL.createObjectURL(new Blob([response.data]) );
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", "expense_details.xlsx");
-        document.body.appendChild(link);
-        link.click();
-        link.parentNode.removeChild(link);
-        window.URL.revokeObjectURL(url);
-      } catch (error){
-        console.log("Error downloading expense details:", error);
-        toast.error("Failed to download expense details. Please try again.");
-      }
+            // Create a URL for the blob
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", "expense_details.xlsx");
+            document.body.appendChild(link);
+            link.click();
+            link.parentNode.removeChild(link);
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.log("Error downloading expense details:", error);
+            toast.error("Failed to download expense details. Please try again.");
+        }
 
     };
 
     useEffect(() => {
         fetchExpenseDetails();
 
-        return () => {};
+        return () => { };
     }, []);
 
     return (
         <DashboardLayout activeMenu="Expense">
-            <div className="my-5 mx-auto">
-                <div>
+            <div className="mx-auto">
+                <div className="mb-8">
+                    <h1 className="text-2xl md:text-3xl font-bold text-slate-900">
+                        Expenses Details
+                    </h1>
+                    <p className="text-slate-500 mt-1 font-medium">
+                        Monitor your spending and manage your expense categories.
+                    </p>
+                </div>
+
+                <div className="grid grid-cols-1 gap-8">
                     <div>
                         <ExpenseOverview
                             transactions={expenseData}

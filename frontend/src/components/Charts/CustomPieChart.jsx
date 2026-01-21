@@ -45,7 +45,7 @@ const CustomPieChart = ({
           ))}
         </Pie>
         <Tooltip content={CustomTooltip} />
-        <Legend content={CustomLegend}/>
+        <Legend content={CustomLegend} />
 
         {showTextAnchor && (
           <>
@@ -68,7 +68,7 @@ const CustomPieChart = ({
               fontSize="24px"
               fontWeight="600"
             >
-              ₹{totalAmount}
+              {totalAmount}
             </text>
           </>
         )}

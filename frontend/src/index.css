@@ -1,40 +1,86 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
 @theme {
     --font-display: "Poppins", "sans-serif";
+    --font-sans: "Inter", "sans-serif";
     --breakpoint-3xl: 1920px;
     --color-primary: #875cf5;
+    --color-primary-dark: #7047eb;
+    --color-primary-light: #f5f3ff;
 }
+
 @layer base {
     html {
-        font-family: var(--font-display);
+        font-family: var(--font-sans);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: var(--font-display);
+        @apply tracking-tight font-semibold text-slate-900;
+    }
+
     body {
-        background-color: #fcfbfc;
-        overflow-x: hidden;
+        @apply bg-[#f8fafc] text-slate-600 overflow-x-hidden;
     }
 }
 
 .input-box {
-    @apply w-full flex justify-between gap-3 text-sm text-black bg-slate-100 rounded px-4 py-3 mb-4 mt-3 border border-slate-200 outline-none;
+    @apply w-full flex justify-between gap-3 text-sm text-slate-900 bg-white rounded-xl px-4 py-3 mb-4 mt-1 border border-slate-200 outline-none transition-all duration-200 ease-in-out focus:border-primary focus:ring-4 focus:ring-primary/10 placeholder:text-slate-400;
 }
+
 .btn-primary {
-    @apply w-full text-sm font-medium text-white bg-violet-500 shadow-lg shadow-purple-600/5 p-[10px] rounded-md my-1 hover:bg-purple-600/15 hover:text-purple-600;
+    @apply w-full text-sm font-semibold text-white bg-primary shadow-sm p-[12px] rounded-xl transition-all duration-200 active:scale-[0.98] hover:bg-primary-dark hover:shadow-lg hover:shadow-primary/20;
 }
 
-.card{
-    @apply bg-white p-6 rounded-2xl shadow-md shadow-gray-100 border border-gray-200/50;
+.card {
+    @apply bg-white p-6 rounded-3xl shadow-[0_4px_20px_-4px_rgba(15, 23, 42, 0.08)] border border-slate-200/60 transition-all duration-300 hover:shadow-[0_8px_30px_-4px_rgba(15, 23, 42, 0.12)];
 }
 
-.card-btn{
-    @apply flex items-center gap-3 text-[12px] font-medium text-gray-700 hover:text-purple-500 bg-gray-50 hover:bg-purple-50 px-4 py-1.5 rounded-lg border border-gray-200/50 cursor-pointer;
+.card-btn {
+    @apply flex items-center gap-2 text-xs font-semibold text-slate-600 bg-slate-50 hover:bg-primary hover:text-white px-4 py-2 rounded-xl border border-slate-200/60 transition-all duration-200 cursor-pointer;
 }
 
-.add-btn{
-    @apply flex items-center gap-1.5 text-xs md:text-sm font-medium text-purple-600 whitespace-nowrap bg-purple-50 border border-purple-100 rounded-lg px-4 py-2 cursor-pointer;
+.add-btn {
+    @apply flex items-center gap-2 text-sm font-semibold text-primary bg-primary-light border border-primary/20 rounded-xl px-5 py-2.5 transition-all duration-200 hover:bg-primary hover:text-white cursor-pointer active:scale-95;
 }
 
-.add-btn-fill{
-    @apply text-white bg-primary
+.add-btn-fill {
+    @apply text-white bg-primary shadow-lg shadow-primary/10 hover:shadow-primary/20;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-slate-200 rounded-full hover:bg-slate-300;
+}
+
+@keyframes bounce-subtle {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+.animate-bounce-subtle {
+    animation: bounce-subtle 3s ease-in-out infinite;
 }
