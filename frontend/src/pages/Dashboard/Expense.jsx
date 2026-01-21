@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
-import { useUserAuth } from "../../hooks/useUserAuth";
+import { useUserAuth } from "../../hooks/UseUserAuth";
 import toast from "react-hot-toast";
 import axiosInstance from "../../utils/axiosInstance";
 import { useEffect } from "react";
