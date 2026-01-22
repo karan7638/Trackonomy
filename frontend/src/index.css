@@ -8,9 +8,6 @@
     --color-primary: #875cf5;
     --color-primary-dark: #7047eb;
     --color-primary-light: #f5f3ff;
-
-    --shadow-card: 0 4px 20px -4px rgba(15, 23, 42, 0.08);
-    --shadow-card-hover: 0 8px 30px -4px rgba(15, 23, 42, 0.12);
 }
 
 @layer base {
@@ -44,7 +41,12 @@
 }
 
 .card {
-    @apply bg-white p-6 rounded-3xl shadow-card border border-slate-200/60 transition-all duration-300 hover:shadow-card-hover;
+    @apply bg-white p-6 rounded-3xl border border-slate-200/60 transition-all duration-300;
+    box-shadow: 0 4px 20px -4px rgba(15, 23, 42, 0.08);
+}
+
+.card:hover {
+    box-shadow: 0 8px 30px -4px rgba(15, 23, 42, 0.12);
 }
 
 .card-btn {
