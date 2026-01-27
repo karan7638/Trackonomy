@@ -11,17 +11,15 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 
 const app = express();
 
-// Middleware to handle CORS
-app.use(
-  cors({
-    origin: "*", // Allow all origins for debugging, or set specific frontend URL
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"],
-    credentials: true,
-  })
-);
+// Simplified CORS for Vercel
+app.use(cors({
+  origin: ["https://trackonomy-ol51.vercel.app", "http://localhost:5173"],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
+}));
 
-app.options("*", cors()); // Handle preflight requests for all routes
+app.options("*", cors()); // Explicitly handle preflight across all routes
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
