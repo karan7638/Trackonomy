@@ -11,15 +11,24 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 
 const app = express();
 
-// Simplified CORS for Vercel
-app.use(cors({
-  origin: ["https://trackonomy-ol51.vercel.app", "http://localhost:5173"],
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true
-}));
+// Manual CORS handling for reliability on Vercel
+app.use((req, res, next) => {
+  const allowedOrigins = ["https://trackonomy-ol51.vercel.app", "http://localhost:5173"];
+  const origin = req.headers.origin;
 
-app.options("*", cors()); // Explicitly handle preflight across all routes
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With, Accept");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+  next();
+});
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
