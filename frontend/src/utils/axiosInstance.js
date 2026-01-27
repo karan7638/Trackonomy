@@ -3,7 +3,7 @@ import { BASE_URL } from "./apiPaths";
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
-  timeout: 10000,
+  timeout: 30000,
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
@@ -39,7 +39,9 @@ axiosInstance.interceptors.response.use(
         console.error("Server error. Please try again later.");
       }
     } else if (error.code === "ECONNABORTED") {
-      console.error("Request timeout. Please try again.");
+      console.error("Request timeout. This could be due to a cold start or a database connection issue. Please try again or check your backend URL.");
+    } else {
+      console.error("API Error:", error.message || error);
     }
     return Promise.reject(error);
   }
